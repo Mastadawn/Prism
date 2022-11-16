@@ -1,3 +1,4 @@
+warn("spr imported")
 ---------------------------------------------------------------------
 -- spr - Spring-driven motion library
 --
