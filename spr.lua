@@ -399,7 +399,7 @@ local typeMetadata = {
 local springStates = {} -- {[instance] = {[property] = spring}
 
 RunService.Heartbeat:Connect(function(dt)
-	for instance, state in pairs(springStates) do
+	for instance, state in springStates do
 		for propName, spring in state do
 			if spring:canSleep() then
 				state[propName] = nil
