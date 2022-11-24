@@ -1,4 +1,4 @@
-return Changes = {
+return {
   "Fixed some of the launcher bugs",
   "Improved loading time",
   "Released",
