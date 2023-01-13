@@ -1,5 +1,5 @@
 --[[
-bad custom viewmodel i made for universal usage.
+bad custom viewmodel i made for universal usage hf.
 ]]
 controller = {};
 viewmodels = {};
@@ -51,13 +51,13 @@ function controller:createViewmodel()
         end
     end
     for i,v in pairs(partslist) do
-       v.CFrame = Main.CFrame * CFrame.Angles(0,0,0) * CFrame.new(4,-2,-5)
+       v.CFrame = Main.CFrame
     end
     local newweld = Instance.new("WeldConstraint",tool)
     newweld.Part0 = tool:FindFirstChildWhichIsA("Part") or tool:FindFirstChildWhichIsA("MeshPart") or tool:FindFirstChildWhichIsA("UnionOperation");
     newweld.Part1 = Main
-    game:GetService("Workspace").CurrentCamera.Changed:Connect(function()
-        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame;
+    game:GetService("RunService").RenderStepped:Connect(function()
+        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame * CFrame.new(4,-2,-5);
     end);
     return viewmodel;
 end;
