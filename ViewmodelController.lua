@@ -66,4 +66,4 @@ function controller:cleanUp()
     end
 end
 
-controller:createViewmodel()
+return controller
