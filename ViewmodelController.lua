@@ -1,3 +1,6 @@
+--[[
+bad custom viewmodel i made for universal usage.
+]]
 controller = {};
 viewmodels = {};
 
