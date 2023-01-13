@@ -57,7 +57,7 @@ function controller:createViewmodel()
     newweld.Part0 = tool:FindFirstChildWhichIsA("Part") or tool:FindFirstChildWhichIsA("MeshPart") or tool:FindFirstChildWhichIsA("UnionOperation");
     newweld.Part1 = Main
     game:GetService("RunService").RenderStepped:Connect(function()
-        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame * CFrame.new(4,-2,-5);
+        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame * CFrame.new(4,-.3,-5);
     end);
     return viewmodel;
 end;
