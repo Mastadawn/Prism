@@ -1,6 +1,3 @@
---[[
-bad custom viewmodel i made for universal usage hf.
-]]
 controller = {};
 viewmodels = {};
 
@@ -13,7 +10,7 @@ function controller:getTool()
 end;
 
 function controller:weldModel(inst)
-    welds = {}
+    local welds = {}
     local model = inst:Clone()
     for _,v in pairs(model:GetDescendants()) do
         if v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation") then
@@ -29,13 +26,13 @@ function controller:weldModel(inst)
 end;
 
 function controller:createViewmodel()
-    viewmodel = {};
+    local viewmodel = {};
     local vm = Instance.new("Model",game:GetService("Workspace").CurrentCamera);
     vm.Name = game:GetService("HttpService"):GenerateGUID(false);
     viewmodel[1] = vm;
     viewmodels[#viewmodels + 1] = viewmodel;
     
-    Main = Instance.new("Part",vm)
+    local Main = Instance.new("Part",vm)
     Main.Size = Vector3.new(1,1,1);
     Main.Transparency = 1;
     Main.Anchored = true;
@@ -44,21 +41,22 @@ function controller:createViewmodel()
     local item = controller:getTool();
     local tool = controller:weldModel(item)
     tool.Parent = vm
-    partslist = {};
+    local partslist = {};
+    viewmodel[2] = partslist
     for i,v in pairs(tool:GetDescendants()) do
         if v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation") then
             partslist[#partslist + 1] = v 
         end
     end
     for i,v in pairs(partslist) do
-       v.CFrame = Main.CFrame
+       v.CFrame = Main.CFrame * CFrame.Angles(0,math.rad(10),0) * CFrame.new(4,-2,-5)
     end
     local newweld = Instance.new("WeldConstraint",tool)
     newweld.Part0 = tool:FindFirstChildWhichIsA("Part") or tool:FindFirstChildWhichIsA("MeshPart") or tool:FindFirstChildWhichIsA("UnionOperation");
     newweld.Part1 = Main
-    game:GetService("RunService").RenderStepped:Connect(function()
-        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame * CFrame.new(4,-.3,-5);
-    end);
+    game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+        Main.CFrame = game:GetService("Workspace").CurrentCamera.CFrame
+    end)
     return viewmodel;
 end;
 
